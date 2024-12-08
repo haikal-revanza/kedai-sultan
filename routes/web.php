@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\OrderController;
 
 // Rute untuk Login & Logout
 Route::middleware('guest')->group(function () {
@@ -20,7 +21,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     })->name('dashboard');
     Route::resource('menus', MenuController::class)->except('show');
     Route::get('menus/{menu}/download', [MenuController::class, 'downloadImage'])->name('menus.download');
-
 });
 
 // Dashboard Kasir
@@ -29,3 +29,11 @@ Route::middleware(['auth', 'role:kasir'])->prefix('kasir')->name('kasir.')->grou
         return view('kasir.dashboard');
     })->name('dashboard');
 });
+
+// Rute untuk pelanggan (tanpa login)
+Route::get('/menus', [OrderController::class, 'showMenus'])->name('menus.index');
+Route::post('/order', [OrderController::class, 'storeOrder'])->name('order.store'); // Menambahkan rute POST untuk menyimpan pesanan
+Route::get('/order/edit', [OrderController::class, 'editOrder'])->name('order.edit');
+Route::post('/order/update', [OrderController::class, 'updateOrder'])->name('order.update');
+
+Route::post('/order/delete', [OrderController::class, 'deleteOrderItem'])->name('order.delete');
