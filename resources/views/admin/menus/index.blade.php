@@ -1,4 +1,6 @@
-@extends('admin.dashboard')
+@extends('layouts.app')
+
+@section('title', 'Daftar Menu')
 
 @section('content')
 <div class="container">
