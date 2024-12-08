@@ -6,7 +6,6 @@
 <div class="d-flex">
     <!-- Sidebar -->
     <div class="bg-light p-3" style="width: 250px; height: 100vh;">
-        <h4>Kedai Sultan</h4>
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}">Dashboard</a>
